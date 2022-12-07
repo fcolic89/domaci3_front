@@ -16,7 +16,7 @@ export class RequestService {
 
   login(email: string, password: string): Observable<LoginResponse>{
 
-     return this.httpClient.post<LoginResponse>(`${this.url}/login`, {
+     return this.httpClient.post<LoginResponse>(`${this.url}/auth/login`, {
       email: email,
       password: password,
     })
