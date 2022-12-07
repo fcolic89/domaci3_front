@@ -1,1 +1,8 @@
-<p>login works!</p>
+<div>
+    <h3>Login</h3>
+    <form [formGroup]="loginGroup" (submit)="login()">
+        <input type="email" id="emailInput" value="a" name="email" placeholder="Email..." [formControlName]="'lgEmail'"><br><br>
+        <input  type="password" id="passwordInput" value="a" name="password" placeholder="Password" [formControlName]="'lgPassword'"><br><br>
+        <button type="submit" id="loginBtn">Submit</button>
+    </form>
+</div>
