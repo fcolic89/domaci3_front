@@ -1,1 +1,28 @@
-<p>read-users works!</p>
+<div>
+    <form (submit)="getUsers()">
+        <button type="submit">Refresh</button>
+    </form>
+</div>
+<div>
+    <h3>Users:</h3>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Last name</th>
+            <th>Email</th>
+            <th>Read</th>
+            <th>Update</th>
+            <th>Create</th>
+            <th>Delete</th>
+        </tr>
+        <tr *ngFor="let user of users">        
+            <td>{{user.name}}</td>
+            <td>{{user.lastname}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.canRead}}</td>
+            <td>{{user.canUpdate}}</td>
+            <td>{{user.canCreate}}</td>
+            <td>{{user.canDelete}}</td>
+        </tr>
+    </table>
+</div>

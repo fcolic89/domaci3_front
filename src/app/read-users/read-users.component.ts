@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from 'src/model';
+import { RequestService } from '../request.service';
 
 @Component({
   selector: 'app-read-users',
@@ -7,9 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReadUsersComponent implements OnInit {
 
-  constructor() { }
+  users: User[] = [];
+
+  constructor(private requsetService: RequestService) { }
 
   ngOnInit(): void {
+    this.getUsers();
+  }
+
+  getUsers(): void{
+    this.requsetService.getUsers().subscribe(
+      res => {
+       this.users = res;
+      }
+    );
   }
 
 }
