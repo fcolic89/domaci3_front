@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
+import {HttpClient, HttpHeaderResponse, HttpHeaders, HttpParams, HttpResponse, HttpResponseBase} from "@angular/common/http";
 import { GetUsersResponse, LoginResponse, User } from 'src/model';
 import {Observable} from "rxjs";
 import { environment } from 'src/environments/environment';
@@ -47,7 +47,20 @@ export class RequestService {
       headers: new HttpHeaders(headerDict), 
     };
 
-    return this.httpClient.get<User>('http://127.0.0.1:8081/api/users/'+1, requestOptions);
+    return this.httpClient.get<User>('http://127.0.0.1:8081/api/users/'+num, requestOptions);
+  }
+
+  deleteUser(id: number):Observable<HttpResponseBase>{
+    const headerDict = {
+      'Accept': 'application/json',
+      'Authorization': 'Bearer ' + this.getJwt(),
+    }
+    
+    const requestOptions = {                                                                                                                                                                                 
+      headers: new HttpHeaders(headerDict),
+    };
+
+    return this.httpClient.get<HttpResponseBase>('http://127.0.0.1:8081/api/users/'+id, requestOptions);
   }
 
   getJwt(): string{

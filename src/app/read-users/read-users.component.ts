@@ -25,4 +25,16 @@ export class ReadUsersComponent implements OnInit {
     );
   }
 
+  editUser(user: User):void{
+    console.log("edit user: " + user.email);
+  }
+
+  deleteUser(id: number):void{
+    this.requsetService.deleteUser(id).subscribe(
+      res => {
+        console.log(res);
+      }
+    )
+  }
+
 }
