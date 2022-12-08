@@ -28,12 +28,15 @@ export class LoginComponent implements OnInit {
     ).subscribe(res => {
       if(res.jwt.length == 0)
       localStorage.removeItem("jwt")
-    localStorage.setItem("jwt", JSON.parse(jwt_decode(res.jwt)));
+    localStorage.setItem("jwt", jwt_decode(res.jwt));
     })
   }
 
   ngOnInit(): void {
-    localStorage.setItem("jwt","eyJhbGciOiJIUzUxMiJ9.eyJjYW5fcmVhZCI6dHJ1ZSwiY2FuX2NyZWF0ZSI6dHJ1ZSwic3ViIjoidXNlcjBAbWFpbC5jb20iLCJjYW5fZGVsZXRlIjp0cnVlLCJjYW5fdXBkYXRlIjp0cnVlfQ.TNSLNv0XqzFBTsVpi4OLWNAziLZscbnGTka07pHz10dUruUfVkYARWX4r7Hz6ffTo42h__JXPoemVssCtWiBwQ");    
+    //sve je true
+    // localStorage.setItem("jwt","eyJhbGciOiJIUzUxMiJ9.eyJjYW5fcmVhZCI6dHJ1ZSwiY2FuX2NyZWF0ZSI6dHJ1ZSwic3ViIjoidXNlcjBAbWFpbC5jb20iLCJjYW5fZGVsZXRlIjp0cnVlLCJjYW5fdXBkYXRlIjp0cnVlfQ.TNSLNv0XqzFBTsVpi4OLWNAziLZscbnGTka07pHz10dUruUfVkYARWX4r7Hz6ffTo42h__JXPoemVssCtWiBwQ");    
+    //samo je read true
+    localStorage.setItem("jwt", 'eyJhbGciOiJIUzUxMiJ9.eyJjYW5fcmVhZCI6dHJ1ZSwiY2FuX2NyZWF0ZSI6ZmFsc2UsInN1YiI6InVzZXIwQG1haWwuY29tIiwiY2FuX2RlbGV0ZSI6ZmFsc2UsImNhbl91cGRhdGUiOmZhbHNlfQ.IMbtZr2_NCSxI0CRNyKBywUfMZrms_zKSk800pOOTuBv1KVib-z6I40hdSL1Bf8HpOMDNSw23mL1OnPgAe1riw')
   }
 
 }
