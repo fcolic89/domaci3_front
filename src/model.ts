@@ -9,10 +9,10 @@ export interface GetUsersResponse{
 
 export class UserInfo{
     sub: string = '';
-    can_read: number = 0;
-    can_create: number = 0;
-    can_delete: number = 0;
-    can_update: number = 0;
+    can_read: boolean = false;
+    can_create: boolean = false;
+    can_delete: boolean = false;
+    can_update: boolean = false;
 }
 
 export interface User{
@@ -21,8 +21,8 @@ export interface User{
     password: string,
     name: string,
     lastname: string,
-    canRead: number,
-    canCreate: number,
-    canDelete: number,
-    canUpdate: number
+    canRead: boolean,
+    canCreate: boolean,
+    canDelete: boolean,
+    canUpdate: boolean
 }

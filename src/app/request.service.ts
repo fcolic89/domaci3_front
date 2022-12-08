@@ -16,7 +16,7 @@ export class RequestService {
 
   login(email: string, password: string): Observable<LoginResponse>{
 
-     return this.httpClient.post<LoginResponse>(`${this.url}/auth/login`, {
+     return this.httpClient.post<LoginResponse>(`127.0.0.1:8081/auth/login`, {
       email: email,
       password: password,
     })
@@ -60,8 +60,31 @@ export class RequestService {
       headers: new HttpHeaders(headerDict),
     };
 
-    return this.httpClient.get<HttpResponseBase>('http://127.0.0.1:8081/api/users/'+id, requestOptions);
+    return this.httpClient.delete<HttpResponseBase>('http://127.0.0.1:8081/api/users/'+id, requestOptions);
   }
+
+  updateUser(user: User):Observable<HttpResponseBase>{
+    const headerDict = {
+      'Accept': 'application/json',
+      'Authorization': 'Bearer ' + this.getJwt(),
+    }
+    
+    const requestOptions = {                                                                                                                                                                                 
+      headers: new HttpHeaders(headerDict),
+    };
+
+    return this.httpClient.put<HttpResponseBase>('http://127.0.0.1:8081/api/users', {
+      id: user.id,
+      email: user.email,
+      name: user.name,
+      lastname: user.lastname,
+      canRead: user.canRead,
+      canCreate: user.canCreate,
+      canUpdate: user.canUpdate,
+      canDelete: user.canDelete
+    }, requestOptions);
+  }  
+
 
   getJwt(): string{
     let tmp: string | null | undefined;
