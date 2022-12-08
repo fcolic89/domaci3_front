@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
     ).subscribe(res => {
       if(res.jwt.length == 0)
       localStorage.removeItem("jwt")
-    localStorage.setItem("jwt", jwt_decode(res.jwt));
+    localStorage.setItem("jwt", res.jwt);
     })
   }
 
