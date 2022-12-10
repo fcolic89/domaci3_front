@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import {HttpClient, HttpHeaderResponse, HttpHeaders, HttpParams, HttpResponse, HttpResponseBase} from "@angular/common/http";
-import { GetUsersResponse, LoginResponse, User } from 'src/model';
+import { GetUsersResponse, LoginResponse, User, UserInfo } from 'src/model';
 import {Observable} from "rxjs";
 import { environment } from 'src/environments/environment';
 
@@ -11,6 +11,7 @@ import { environment } from 'src/environments/environment';
 export class RequestService {
 
   url: string = environment.baseUrl;
+  userInfo: UserInfo = {sub: '', can_create: false, can_delete: false, can_read: false, can_update: false} as UserInfo;
 
   constructor(private httpClient: HttpClient) { }
 
@@ -23,7 +24,7 @@ export class RequestService {
   }
 
   getUsers(): Observable<User[]>{
-    
+
     const headerDict = {
       'Accept': 'application/json',
       'Authorization': 'Bearer ' + this.getJwt(),
@@ -108,6 +109,11 @@ export class RequestService {
     }, {headers: new HttpHeaders(headerDict), observe: 'response'});
   }
 
+  logout(): void{
+    localStorage.removeItem('jwt');
+    this.userInfo = {sub: '', can_create: false, can_delete: false, can_read: false, can_update: false};
+  
+  }
 
   getJwt(): string{
     let tmp: string | null | undefined;
