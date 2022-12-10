@@ -4,13 +4,11 @@
       <a [routerLink]="'/'" class="navbar-brand">Domaci 3</a>
       <div class="collapse navbar-collapse justify-content-between" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-          <a [routerLink]="'/login'" class="nav-link active" aria-current="page">Login</a>
-          <a [routerLink]="'/read'" class="nav-link active" aria-current="page">Read users</a>
-          <a [routerLink]="'/create'" class="nav-link active" aria-current="page">Create user</a>
-          <!-- <a [routerLink]="'/sentiment-analysis'" class="nav-link active" aria-current="page">Sentiment analysis</a> -->
-          <!-- <a [routerLink]="'/text-similarity'" class="nav-link active" aria-current="page">Text similarity</a> -->
-          <!-- <a [routerLink]="'/history'" class="nav-link active" aria-current="page">History</a> -->
-        </div>
+          <a [hidden]="(requestService.userInfo.sub !== '')" [routerLink]="'/login'" class="nav-link active" aria-current="page">Login</a>
+          <a [hidden]="!requestService.userInfo.can_read" [routerLink]="'/read'" class="nav-link active" aria-current="page">Read users</a>
+          <a [hidden]="!requestService.userInfo.can_create" [routerLink]="'/create'" class="nav-link active" aria-current="page">Create user</a>
+          <button [hidden]="(requestService.userInfo.sub === '')" (click) = "logout()">Log out</button>
+         </div>
       </div>
     </div>
   </nav>
