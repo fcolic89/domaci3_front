@@ -28,7 +28,7 @@
             <td>{{user.canUpdate}}</td>
             <td>{{user.canCreate}}</td>
             <td>{{user.canDelete}}</td>
-            <button (click) = "deleteUser(user.id)" [hidden]="hide">Delete</button>
+            <button (click) = "deleteUser(user.id)" [hidden]="!requestService.userInfo.can_delete">Delete</button>
         </tr>
     </table>
 </div>

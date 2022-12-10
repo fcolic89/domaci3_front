@@ -11,6 +11,10 @@ export class AppComponent {
   title = 'domaci3_front';
   constructor(public requestService: RequestService, private router: Router){}
 
+  ngOnInit(): void{
+    this.requestService.load();
+  }
+
   logout(): void{
     this.requestService.logout();
     this.router.navigate(['/login']);

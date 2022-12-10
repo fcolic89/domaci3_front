@@ -4,6 +4,7 @@ import {HttpClient, HttpHeaderResponse, HttpHeaders, HttpParams, HttpResponse, H
 import { GetUsersResponse, LoginResponse, User, UserInfo } from 'src/model';
 import {Observable} from "rxjs";
 import { environment } from 'src/environments/environment';
+import jwtDecode from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
@@ -115,6 +116,12 @@ export class RequestService {
   
   }
 
+  load(): void{
+    let str: string = this.getJwt();
+    if(str !== '')
+      this.userInfo = jwtDecode(str) as UserInfo;
+  }
+
   getJwt(): string{
     let tmp: string | null | undefined;
 
@@ -124,12 +131,5 @@ export class RequestService {
     else
       return tmp.toString()
   }
-
-  getAuthHeader(): HttpHeaders{
-    var h = new HttpHeaders();
-    h.append('Authorization', 'Bearer ' + this.getJwt());
-    return h;
-  }
-
 }
 

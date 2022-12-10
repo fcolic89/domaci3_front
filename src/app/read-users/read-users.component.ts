@@ -12,13 +12,11 @@ import {HttpResponseBase} from "@angular/common/http";
 export class ReadUsersComponent implements OnInit {
 
   users: User[] = [];
-  hide: boolean = false;
+
   constructor(public requestService: RequestService) { }
 
   ngOnInit(): void {
     this.getUsers();
-    if(this.requestService.userInfo.can_delete)
-      this.hide = true;
   }
 
   getUsers(): void{
@@ -32,9 +30,9 @@ export class ReadUsersComponent implements OnInit {
   deleteUser(id: number):void{
     this.requestService.deleteUser(id).subscribe(
       res => {
-        console.log(res);
+        this.getUsers();
       }, (err:HttpResponseBase)=>{alert("Doslo je do greske prilikom brisanja korisniksa!")}
-    )
+    );
   }
 
 }
