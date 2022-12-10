@@ -40,7 +40,7 @@ export class AuthGuard implements CanActivate {
     else if(url.path.includes('read') && userInfo.can_read)
       return true;
 
-    alert("Korisnik nema mogucnost koriscenja ove funkcije!")
+    alert("Korisnik nema mogucnost koriscenja ove funkcije!");
 
     return false;
   }
