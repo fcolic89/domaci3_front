@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import jwt_decode from 'jwt-decode';
 import { User, UserInfo } from 'src/model';
 import { RequestService } from '../request.service';
+import {HttpResponseBase} from "@angular/common/http";
 
 @Component({
   selector: 'app-read-users',
@@ -26,7 +27,7 @@ export class ReadUsersComponent implements OnInit {
     this.requsetService.getUsers().subscribe(
       res => {
        this.users = res;
-      }
+      },(err:User[])=>{alert("Doslo je do greske prilikom skupljanja korisniksa!")}
     );
   }
 
@@ -38,7 +39,7 @@ export class ReadUsersComponent implements OnInit {
     this.requsetService.deleteUser(id).subscribe(
       res => {
         console.log(res);
-      }
+      }, (err:HttpResponseBase)=>{alert("Doslo je do greske prilikom brisanja korisniksa!")}
     )
   }
 

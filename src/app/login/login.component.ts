@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {ActivatedRoute, Router} from "@angular/router";
 import jwtDecode from 'jwt-decode';
-import { UserInfo } from 'src/model';
+import { LoginResponse, UserInfo } from 'src/model';
 import { RequestService } from '../request.service';
 
 @Component({
@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
       alert("Korisnik nema nijednu permisiju! Odjavljivanje!");
       this.requestService.logout();
     }
-    })
+    },(err:LoginResponse)=>{alert("Doslo je do greske prilikom prijavljivanja!")})
   }
 
   ngOnInit(): void {

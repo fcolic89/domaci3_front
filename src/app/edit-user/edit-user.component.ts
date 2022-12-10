@@ -3,6 +3,7 @@ import { FormGroup, Validators, FormBuilder} from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { User } from 'src/model';
 import { RequestService } from '../request.service';
+import {HttpResponseBase} from "@angular/common/http";
 
 @Component({
   selector: 'app-edit-user',
@@ -29,7 +30,7 @@ export class EditUserComponent implements OnInit {
   updateUser(): void{
     this.requestService.updateUser(this.user).subscribe(res => {
       console.log("uspesan send");
-    })
+    },(err:HttpResponseBase)=>{alert("Doslo je do greske prilikom azuriranja korisnika!")})
   }
 
   ngOnInit(): void {
@@ -42,7 +43,7 @@ export class EditUserComponent implements OnInit {
       this.requestService.getUserById(id).subscribe(res => {
         this.user = res;
 
-      })
+      }, (err:HttpResponseBase)=>{alert("Doslo je do greske prilikom skupljanja informacija o  korisniku!")})
     }
   }
 
