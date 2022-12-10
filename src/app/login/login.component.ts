@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {ActivatedRoute} from "@angular/router";
 import { RequestService } from '../request.service';
-import jwt_decode from 'jwt-decode';
-import { UserInfo } from 'src/model';
 
 @Component({
   selector: 'app-login',
