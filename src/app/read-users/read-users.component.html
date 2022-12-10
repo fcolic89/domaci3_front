@@ -18,7 +18,12 @@
         <tr *ngFor="let user of users">        
             <td>{{user.name}}</td>
             <td>{{user.lastname}}</td>
-            <td><a [routerLink]="'/edit/'+user.id">{{user.email}}</a></td>
+            <div *ngIf="requestService.userInfo.can_update; else elseBlock">
+                <td><a [routerLink]="'/edit/'+user.id">{{user.email}}</a></td>
+            </div>
+            <ng-template #elseBlock>
+                <td>{{user.email}}</td>
+            </ng-template>
             <td>{{user.canRead}}</td>
             <td>{{user.canUpdate}}</td>
             <td>{{user.canCreate}}</td>

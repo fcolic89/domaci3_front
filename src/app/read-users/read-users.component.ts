@@ -13,30 +13,24 @@ export class ReadUsersComponent implements OnInit {
 
   users: User[] = [];
   hide: boolean = false;
-  constructor(private requsetService: RequestService) { }
+  constructor(public requestService: RequestService) { }
 
   ngOnInit(): void {
     this.getUsers();
-    let jwt = this.requsetService.getJwt();
-    console.log(jwt_decode(jwt));
-    if(!(jwt_decode(jwt) as UserInfo).can_delete)
+    if(this.requestService.userInfo.can_delete)
       this.hide = true;
   }
 
   getUsers(): void{
-    this.requsetService.getUsers().subscribe(
+    this.requestService.getUsers().subscribe(
       res => {
        this.users = res;
       },(err:User[])=>{alert("Doslo je do greske prilikom skupljanja korisniksa!")}
     );
   }
 
-  editUser(user: User):void{
-    console.log("edit user: " + user.email);
-  }
-
   deleteUser(id: number):void{
-    this.requsetService.deleteUser(id).subscribe(
+    this.requestService.deleteUser(id).subscribe(
       res => {
         console.log(res);
       }, (err:HttpResponseBase)=>{alert("Doslo je do greske prilikom brisanja korisniksa!")}
