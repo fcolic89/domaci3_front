@@ -87,6 +87,28 @@ export class RequestService {
     }, requestOptions);
   }  
 
+  updateUser2(user: User):Observable<LoginResponse>{
+    const headerDict = {
+      'Accept': 'application/json',
+      'Authorization': 'Bearer ' + this.getJwt(),
+    }
+    
+    const requestOptions = {                                                                                                                                                                                 
+      headers: new HttpHeaders(headerDict),
+    };
+
+    return this.httpClient.put<LoginResponse>('http://127.0.0.1:8081/api/users/self', {
+      id: user.id,
+      email: user.email,
+      name: user.name,
+      lastname: user.lastname,
+      canRead: user.canRead,
+      canCreate: user.canCreate,
+      canUpdate: user.canUpdate,
+      canDelete: user.canDelete
+    }, requestOptions);
+  }
+
   createUser(user: User):Observable<HttpResponseBase>{
     const headerDict = {
       'Accept': 'application/json',
