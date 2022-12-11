@@ -15,7 +15,6 @@ export class EditUserComponent implements OnInit {
 
   user: User = {} as User;
   editGroup: FormGroup;
-  updateSelf: boolean = false;
 
   constructor(private route: ActivatedRoute, private requestService: RequestService, private formBuilder: FormBuilder) { 
     this.editGroup = this.formBuilder.group({
@@ -48,8 +47,6 @@ export class EditUserComponent implements OnInit {
      id = +s;
       this.requestService.getUserById(id).subscribe(res => {
         this.user = res;
-        if(this.user.email === this.requestService.userInfo.sub)
-          this.updateSelf = true;
       }, (err:HttpResponseBase)=>{alert("Doslo je do greske prilikom skupljanja informacija o  korisniku!")})
     }
   }
