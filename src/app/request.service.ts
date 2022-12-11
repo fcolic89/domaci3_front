@@ -65,7 +65,7 @@ export class RequestService {
     return this.httpClient.delete<HttpResponseBase>('http://127.0.0.1:8081/api/users/'+id, requestOptions);
   }
 
-  updateUser(user: User):Observable<HttpResponseBase>{
+  updateUser(user: User):Observable<LoginResponse>{
     const headerDict = {
       'Accept': 'application/json',
       'Authorization': 'Bearer ' + this.getJwt(),
@@ -75,29 +75,7 @@ export class RequestService {
       headers: new HttpHeaders(headerDict),
     };
 
-    return this.httpClient.put<HttpResponseBase>('http://127.0.0.1:8081/api/users', {
-      id: user.id,
-      email: user.email,
-      name: user.name,
-      lastname: user.lastname,
-      canRead: user.canRead,
-      canCreate: user.canCreate,
-      canUpdate: user.canUpdate,
-      canDelete: user.canDelete
-    }, requestOptions);
-  }  
-
-  updateUser2(user: User):Observable<LoginResponse>{
-    const headerDict = {
-      'Accept': 'application/json',
-      'Authorization': 'Bearer ' + this.getJwt(),
-    }
-    
-    const requestOptions = {                                                                                                                                                                                 
-      headers: new HttpHeaders(headerDict),
-    };
-
-    return this.httpClient.put<LoginResponse>('http://127.0.0.1:8081/api/users/self', {
+    return this.httpClient.put<LoginResponse>('http://127.0.0.1:8081/api/users', {
       id: user.id,
       email: user.email,
       name: user.name,

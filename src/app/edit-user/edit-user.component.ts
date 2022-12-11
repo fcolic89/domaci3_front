@@ -30,18 +30,13 @@ export class EditUserComponent implements OnInit {
   }
 
   updateUser(): void{
-    if(!this.updateSelf)
-      this.requestService.updateUser(this.user).subscribe(res => {
-        console.log("uspesan send");
-      },(err:HttpResponseBase)=>{alert("Doslo je do greske prilikom azuriranja korisnika!")})
-    else
-      this.requestService.updateUser2(this.user).subscribe(res => {
-        console.log("uspesan send");
-        if(res.jwt.length === 0)
-          localStorage.removeItem("jwt")
-        localStorage.setItem("jwt", res.jwt);
-        this.requestService.userInfo = jwtDecode(res.jwt) as UserInfo;
-      },(err:HttpResponseBase)=>{alert("Doslo je do greske prilikom azuriranja korisnika!")})
+    this.requestService.updateUser(this.user).subscribe(res => {
+      alert("Uspesno izvrsene promene!")
+      if(res.jwt.length === 0)
+        localStorage.removeItem("jwt")
+      localStorage.setItem("jwt", res.jwt);
+      this.requestService.userInfo = jwtDecode(res.jwt) as UserInfo;
+    },(err:HttpResponseBase)=>{alert("Doslo je do greske prilikom azuriranja korisnika!")})
   }
 
   ngOnInit(): void {
